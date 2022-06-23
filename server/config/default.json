@@ -1,0 +1,5 @@
+{
+    "port": 5000,
+    "jwtSecret":"LinksCutter",
+    "mongoURI" : "mongodb+srv://Renat:dangerman471@cluster0.mln9m.mongodb.net/?retryWrites=true&w=majority"
+}
