@@ -3,23 +3,24 @@ const UserService = require('../services/UserService')
 
 class UserController {
     async registration(req,res){
-        try{
+        try {
             const errors = validationResult(req)
-            if(!errors.isEmpty()){
-                return res.status(400).json({
-                    errors: errors.array(),
-                    message: 'Некоректнные данные при регистрации'
-                })
+        
+            if (!errors.isEmpty()) {
+              return res.status(400).json({
+                errors: errors.array(),
+                message: 'Некорректный данные при регистрации'
+              })
             }
-            const {email,password} = req.body
+        
+            const {email, password} = req.body
+           
             const userData = await UserService.registration(email,password)
             await userData.save()
-
-            res.status(201).json({message: 'Пользователь создан'})
+            res.status(201).json({ message: 'Пользователь создан' })
         }catch(e){
-            res.starus(500).json({message: "Что-то пошло не так"})
+            res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
         }
-
     }
 
     async login(req,res){
@@ -32,6 +33,7 @@ class UserController {
                 })
             }
             const {email,password} = req.body
+            console.log (email,password)
             const userData = await UserService.login(email,password)
             res.json(userData)
         }catch(e){
